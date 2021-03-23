@@ -1,10 +1,20 @@
 var net=require('net');
-var server=net.createServer(function (socket)
-    {
-        socket.write('echo server\r\n');
-        socket.pipe(socket);
-    }
-)
-server.listen(1337,'127.0.0.1');
-
-console.log('server running at http://127.0.0.1:1337/');
+var clientList=[];
+var server=net.createServer(function (socket) {
+        clientList.push(socket);
+        socket.write('success!\r\n');
+        //socket.pipe(socket);
+        socket.on('data',function(data){
+            console.log(data.toString());
+            //socket.write(data);
+            broadcast(data);
+        });
+        socket.on('end',function (){
+            socket.write('end');
+        });
+    });
+function broadcast(data)
+{
+    for(var i=0;i<clientList.length;i++)
+        clientList[i].write(data);}
+server.listen(1200,'127.0.0.1');
