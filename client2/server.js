@@ -38,13 +38,14 @@ function serveStatic(response,cache,absPath) {
     }
 }
 
-var server =http.createServer(function (request,response){
+var server =http.createServer(function (req,res){
     var filepath=false;
-    if(response.url==='/')
+    if(res.url==='/')
     {
-        filepath='serve.html';
-    }else {filepath='public'+request.url;}
+        filepath='./client.html';
+    }else {filepath='public'+req.url;}
 
     var abspath ='./'+filepath;
-    serveStatic(response,cache,abspath);});
+    serveStatic(res,cache,abspath);});
+server.listen(1200,'127.0.0.1');
 
