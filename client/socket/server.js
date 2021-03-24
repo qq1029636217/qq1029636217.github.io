@@ -1,12 +1,12 @@
 const net = require('net');
 const clientList = [];
+
 const server = net.createServer(function (socket) {
     clientList.push(socket);
-    socket.write('art!\r\n');
-    //socket.pipe(socket);
+    socket.write('connect success!\r\n');
+    console.log('client'+clientList.length+' has connect');
     socket.on('data', function (data) {
         console.log(data.toString());
-        //socket.write(data);
         broadcast(data);
     });
     socket.on('error',function(){
