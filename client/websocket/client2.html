@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>WebSocket Chat</title>
-
 </head>
 <body>
 <script type="text/javascript">
-    var socket;
+    let socket;
     if (!window.WebSocket) {
         window.WebSocket = window.MozWebSocket;
     }
     if (window.WebSocket) {
-        socket = new WebSocket("ws://localhost:8082/ws");
+        socket = new WebSocket("ws://localhost:1200/ws");
         socket.onmessage = function (event) {
-            var ta = document.getElementById('responseText');
+            const ta = document.getElementById('responseText');
             ta.value = ta.value + '\n' + event.data
         };
         socket.onopen = function (event) {
-            var ta = document.getElementById('responseText');
+            const ta = document.getElementById('responseText');
             ta.value = "连接开启!";
         };
         socket.onclose = function (event) {
-            var ta = document.getElementById('responseText');
+            const ta = document.getElementById('responseText');
             ta.value = ta.value + "连接被关闭";
         };
     } else {
