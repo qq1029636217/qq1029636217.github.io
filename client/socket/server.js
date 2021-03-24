@@ -2,7 +2,7 @@ const net = require('net');
 const clientList = [];
 const server = net.createServer(function (socket) {
     clientList.push(socket);
-    socket.write('success!\r\n');
+    socket.write('art!\r\n');
     //socket.pipe(socket);
     socket.on('data', function (data) {
         console.log(data.toString());
