@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>WebSocket Chat</title>
+    <title>szj的聊天室</title>
 </head>
 <body>
 <script type="text/javascript">
@@ -16,11 +16,11 @@
             const ta = document.getElementById('responseText');
             ta.value = ta.value + '\n' + event.data
         };
-        socket.onopen = function (event) {
+        socket.onopen = function () {
             const ta = document.getElementById('responseText');
             ta.value = "连接开启!";
         };
-        socket.onclose = function (event) {
+        socket.onclose = function () {
             const ta = document.getElementById('responseText');
             ta.value = ta.value + "连接被关闭";
         };
@@ -32,7 +32,7 @@
         if (!window.WebSocket) {
             return;
         }
-        if (socket.readyState == WebSocket.OPEN) {
+        if (socket.readyState === WebSocket.OPEN) {
             socket.send(message);
         } else {
             alert("连接没有开启.");
@@ -40,20 +40,14 @@
     }
 </script>
 <form onsubmit="return false;">
-    <h3>feige011的聊天室：</h3>
-    <textarea id="responseText" style="width: 90%; height: 500px;"></textarea>
+    <h3>welcome to sicq</h3>
+    <textarea id="responseText" style="width: 100%; height: 500px;" disabled="disabled"></textarea>
     <br>
-    <input type="text" name="message" style="height: 40px; width: 80%" value="feige011 is ready">
+    <input type="text" name="message" style="height: 40px; width: 80%" value="hello">
     <input type="button" style="height: 40px" value="发送消息" onclick="send(this.form.message.value)">
-    <input type="button" style="height: 40px" onclick="javascript:document.getElementById('responseText').value=''" value="清空聊天记录">
+    <input type="button" style="height: 40px" onclick="document.getElementById('responseText').value=''" value="清空聊天记录">
 </form>
 <br>
 <br>
-
-<!--<form action="">-->
-<!--    <input id="m" type="button" autocomplete="off" onclick="javascript:document.getElementById('responseText').value=''" value="清空聊天记录" />-->
-<!--    <button>Send</button>-->
-<!--</form>-->
 </body>
-
 </html>

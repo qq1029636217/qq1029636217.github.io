@@ -12,7 +12,7 @@ function send404(response){
 
 function sendFile(response,filepath,fileContents){
     response.writeHead(
-        200,{"content-type":mime.lookup(path.basename(filepath))}
+        200,{"content-type":mime.Type(path.basename(filepath))}
     );
     response.end(fileContents);
 }
@@ -38,14 +38,16 @@ function serveStatic(response,cache,absPath) {
     }
 }
 
-var server =http.createServer(function (req,res){
-    var filepath=false;
-    if(res.url==='/')
-    {
-        filepath='./client.html';
-    }else {filepath='public'+req.url;}
+const server = http.createServer(function (req, res) {
+    let filepath;
+    if (res.url === '/') {
+        filepath = './client.html';
+    } else {
+        filepath = 'public' + req.url;
+    }
 
-    var abspath ='./'+filepath;
-    serveStatic(res,cache,abspath);});
+    const abspath = './' + filepath;
+    serveStatic(res, cache, abspath);
+});
 server.listen(1200,'127.0.0.1');
 

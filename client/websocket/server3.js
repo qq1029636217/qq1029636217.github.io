@@ -2,14 +2,14 @@ const WebSocket = require('ws');
 
 const server = new WebSocket.Server({ port: 1200 });
 
+// noinspection JSUnresolvedFunction
 server.on('close', function close() {
     console.log('disconnected');
 });
 
+// noinspection JSUnresolvedFunction
 server.on('connection', function connection(ws, req) {
-    const ip = req.connection.remoteAddress;
-    const port = req.connection.remotePort;
-    const clientName = ip + port;
+    const clientName = req.connection.remotePort;
 
     console.log('%s is connected', clientName)
 
@@ -19,7 +19,7 @@ server.on('connection', function connection(ws, req) {
         console.log('received: %s from %s', message, clientName);
         // 广播消息给所有客户端
         server.clients.forEach(function each(client) {
-            if (client.readyState === WebSocket.OPEN) {
+            if (client.readyState === 1) {
                 client.send( clientName + " -> " + message);
             }
         });
