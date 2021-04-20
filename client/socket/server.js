@@ -4,7 +4,7 @@ const clientList = [];
 const server = net.createServer(function (socket) {
     clientList.push(socket);
     socket.write('connect success!\r\n');
-    console.log('client'+clientList.length+' has connect');
+    console.log(clientList.length+'client has connect');
     socket.on('data', function (data) {
         console.log(data.toString());
         broadcast(data);
@@ -15,6 +15,7 @@ const server = net.createServer(function (socket) {
                 clientList.splice(i,1);
     })
     socket.on('end', function () {
+        console.log("1client exit,there are "+clientList.length-1+' clients now');
         socket.write('end');
     });
 });
